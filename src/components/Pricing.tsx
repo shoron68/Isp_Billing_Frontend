@@ -72,11 +72,23 @@ export default function Pricing() {
               <p className="mt-3 text-sm text-slate-600 dark:text-slate-400">{plan.description}</p>
 
               <div className="mt-6">
-                <span className="text-4xl font-extrabold text-slate-900 dark:text-white">
-                  ${yearly ? plan.yearlyPrice : plan.monthlyPrice}
-                </span>
-                <span className="text-slate-500">/month</span>
+                <div className="text-4xl font-extrabold text-slate-900 dark:text-white">
+                  {plan.priceValue ? (
+                    <>
+                      ৳ {plan.priceValue}
+                      {plan.priceUnit && <span className="mx-2">|</span>}
+                      {plan.priceUnit && <span>{plan.priceUnit.toUpperCase()}</span>}
+                      {plan.pricePeriod && <span className="mx-2">|</span>}
+                      {plan.pricePeriod && <span>{plan.pricePeriod.toUpperCase()}</span>}
+                    </>
+                  ) : (
+                    plan.priceLabel ?? `৳ ${yearly ? plan.yearlyPrice : plan.monthlyPrice}`
+                  )}
+                </div>
+                {plan.setupCharge && <p className="mt-2 text-sm text-slate-500">{plan.setupCharge}</p>}
               </div>
+
+              <div className="my-6 border-t border-dashed border-green-400/30" />
 
               <ul className="mt-8 space-y-3">
                 {plan.features.map((feature) => (

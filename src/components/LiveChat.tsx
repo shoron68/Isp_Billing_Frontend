@@ -9,7 +9,7 @@ const botReplies: Record<string, string> = {
     'Thanks for reaching out! A support agent will be with you shortly. In the meantime, you can also email us at support@nixor.io.',
   demo: 'Great! You can schedule a demo by filling out the contact form or emailing sales@nixor.io. We typically respond within 2 hours.',
   pricing:
-    'Our plans start at $49/month for small ISPs. Check out the pricing section on our homepage for full details, or I can connect you with sales.',
+    'Our plans start at ৳49/month for small ISPs. Check out the pricing section on our homepage for full details, or I can connect you with sales.',
   trial:
     'You can start a 14-day free trial with no credit card required. Click "Start Free Trial" on our homepage to get started!',
 }

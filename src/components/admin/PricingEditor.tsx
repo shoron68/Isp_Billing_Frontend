@@ -174,6 +174,57 @@ export default function PricingEditor() {
                   className="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm dark:border-slate-600 dark:bg-slate-900 dark:text-white"
                 />
               </div>
+              <div>
+                <label className="mb-1 block text-xs font-medium text-slate-500">Price Label</label>
+                <input
+                  value={plan.priceLabel ?? ''}
+                  onChange={(e) => updatePlan(planIndex, 'priceLabel', e.target.value)}
+                  className="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm dark:border-slate-600 dark:bg-slate-900 dark:text-white"
+                />
+              </div>
+              <div>
+                <label className="mb-1 block text-xs font-medium text-slate-500">Price Value</label>
+                <input
+                  value={plan.priceValue ?? ''}
+                  onChange={(e) => updatePlan(planIndex, 'priceValue', e.target.value)}
+                  placeholder="e.g. 4.5 or 2,500"
+                  className="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm dark:border-slate-600 dark:bg-slate-900 dark:text-white"
+                />
+              </div>
+              <div>
+                <label className="mb-1 block text-xs font-medium text-slate-500">Price Unit</label>
+                <input
+                  value={plan.priceUnit ?? ''}
+                  onChange={(e) => updatePlan(planIndex, 'priceUnit', e.target.value)}
+                  placeholder="e.g. USER"
+                  className="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm dark:border-slate-600 dark:bg-slate-900 dark:text-white"
+                />
+              </div>
+              <div>
+                <label className="mb-1 block text-xs font-medium text-slate-500">Price Period</label>
+                <input
+                  value={plan.pricePeriod ?? ''}
+                  onChange={(e) => updatePlan(planIndex, 'pricePeriod', e.target.value)}
+                  placeholder="e.g. MONTH"
+                  className="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm dark:border-slate-600 dark:bg-slate-900 dark:text-white"
+                />
+              </div>
+              <div>
+                <label className="mb-1 block text-xs font-medium text-slate-500">Setup Charge</label>
+                <input
+                  value={plan.setupCharge ?? ''}
+                  onChange={(e) => updatePlan(planIndex, 'setupCharge', e.target.value)}
+                  className="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm dark:border-slate-600 dark:bg-slate-900 dark:text-white"
+                />
+              </div>
+              <div className="sm:col-span-2 lg:col-span-3">
+                <label className="mb-1 block text-xs font-medium text-slate-500">Server Configuration</label>
+                <input
+                  value={plan.serverConfig ?? ''}
+                  onChange={(e) => updatePlan(planIndex, 'serverConfig', e.target.value)}
+                  className="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm dark:border-slate-600 dark:bg-slate-900 dark:text-white"
+                />
+              </div>
             </div>
 
             <div className="mt-4">

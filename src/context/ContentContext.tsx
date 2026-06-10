@@ -23,7 +23,6 @@ type ContentContextType = {
   updateContent: (updates: Partial<SiteContent>) => void
   updatePricing: (plans: PricingPlan[]) => void
   updateDashboardTab: (id: string, updates: Partial<DashboardTab>) => void
-  setShowTestimonials: (show: boolean) => void
   updateContact: (updates: Partial<SiteContent['contact']>) => void
   addMessage: (message: Omit<ContactMessage, 'id' | 'createdAt' | 'emailSent'>) => ContactMessage
   markMessageEmailSent: (id: string) => void
@@ -61,6 +60,16 @@ export function ContentProvider({ children }: { children: ReactNode }) {
     localStorage.setItem(CONTENT_STORAGE_KEY, JSON.stringify(content))
   }, [content])
 
+  /*
+  Content editing notes:
+  - The `content` object contains all editable site text and data (see `src/data/defaultContent.ts`).
+  - Changes made through the Admin UI call `updateContent`, `updatePricing`, `updateDashboardTab`, etc.
+  - All updates are persisted to `localStorage` under `CONTENT_STORAGE_KEY` so they apply instantly to the live site preview.
+  - To programmatically change content from code, call `updateContent({ ... })` with a partial `SiteContent` object.
+  - To reset to defaults call `resetContent()` which clears the stored content and reloads defaults.
+  - Keep `id` values stable for list items to prevent UI reordering or data loss.
+  */
+
   useEffect(() => {
     localStorage.setItem(MESSAGES_STORAGE_KEY, JSON.stringify(messages))
   }, [messages])
@@ -80,10 +89,6 @@ export function ContentProvider({ children }: { children: ReactNode }) {
         tab.id === id ? { ...tab, ...updates } : tab,
       ),
     }))
-  }, [])
-
-  const setShowTestimonials = useCallback((show: boolean) => {
-    setContent((prev) => ({ ...prev, showTestimonials: show }))
   }, [])
 
   const updateContact = useCallback((updates: Partial<SiteContent['contact']>) => {
@@ -127,7 +132,6 @@ export function ContentProvider({ children }: { children: ReactNode }) {
         updateContent,
         updatePricing,
         updateDashboardTab,
-        setShowTestimonials,
         updateContact,
         addMessage,
         markMessageEmailSent,

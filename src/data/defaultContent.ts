@@ -33,14 +33,6 @@ export interface FAQItem {
   answer: string
 }
 
-export interface TestimonialItem {
-  id: string
-  name: string
-  role: string
-  content: string
-  rating: number
-}
-
 export interface CTAContent {
   headline: string
   text: string
@@ -74,6 +66,12 @@ export interface PricingPlan {
   features: PlanFeature[]
   cta: string
   popular: boolean
+  priceLabel?: string
+  setupCharge?: string
+  serverConfig?: string
+  priceValue?: string
+  priceUnit?: string
+  pricePeriod?: string
 }
 
 export interface DashboardStat {
@@ -108,7 +106,6 @@ export interface ContactMessage {
 }
 
 export interface SiteContent {
-  showTestimonials: boolean
   hero: HeroContent
   featuresHeader: SectionHeader
   features: FeatureItem[]
@@ -118,8 +115,8 @@ export interface SiteContent {
   dashboardTabs: DashboardTab[]
   pricingHeader: SectionHeader
   pricing: PricingPlan[]
-  testimonialsHeader: SectionHeader
-  testimonials: TestimonialItem[]
+  ownServerHeader: SectionHeader
+  ownServer: PricingPlan[]
   faqHeader: SectionHeader
   faq: FAQItem[]
   cta: CTAContent
@@ -129,8 +126,27 @@ export interface SiteContent {
   footer: FooterContent
 }
 
+/*
+Editable content overview (quick guide)
+- `hero`: change `badge`, `headline`, `headlineHighlight`, `subheadline`, `ctaPrimary`, `ctaSecondary`, `trustNote1`, `trustNote2`.
+- `featuresHeader`, `whyChooseHeader`, `dashboardHeader`, `pricingHeader`, `faqHeader`, `contactHeader`: each has `badge`, `title`, `subtitle` you can edit.
+- `features`, `whyChoose`, `faq`: arrays of items you can edit (titles, descriptions, questions/answers).
+- `pricing` and `ownServer`: arrays of plans. Editable plan fields:
+  - `name`, `audience`, `monthlyPrice`, `yearlyPrice`, `priceValue`, `priceUnit`, `pricePeriod`
+  - `priceLabel` (free-form), `setupCharge`, `serverConfig`, `description`, `features`, `cta`, `popular`.
+- `dashboardTabs`: edit `stats[*].value` to update numbers shown in the dashboard preview.
+- `cta`, `contact`, `navbar`, `footer`: header, text and button labels are editable.
+
+You can update these values in two ways:
+- Use the Admin Dashboard (Content Manager) in the app — changes are saved to `localStorage` under key `nixor-site-content`.
+- Or edit this file directly and redeploy.
+
+Notes:
+- Numeric fields (e.g., `monthlyPrice`) should remain numbers. Use `priceValue/priceUnit/pricePeriod` when you need formatted labels like "2.5 | USER | MONTH".
+- Keep `id` fields stable when modifying arrays to preserve references.
+*/
+
 export const defaultContent: SiteContent = {
-  showTestimonials: true,
   hero: {
     badge: 'Trusted by ISPs worldwide',
     headline: 'Complete ISP Billing &',
@@ -210,6 +226,93 @@ export const defaultContent: SiteContent = {
         'Data backup',
         'Activity logs',
       ],
+    },
+  ],
+  ownServerHeader: {
+    badge: 'Own Server',
+    title: 'Own Server Options',
+    subtitle: 'If your active customers exceed 2000, we recommend hosting on your own server. Customize plans and server configurations below.',
+  },
+  ownServer: [
+    {
+      id: 'own-1000',
+      name: '1000X',
+      audience: 'Upto 1000 active users',
+      monthlyPrice: 150000,
+      yearlyPrice: 0,
+      description: 'All modules and features included. Recommended for small self-hosted deployments.',
+      features: [
+        { text: 'All Modules', included: true },
+        { text: 'All Features', included: true },
+        { text: 'admin.YourDomain.com', included: true },
+        { text: 'customer.YourDomain.com', included: true },
+        { text: 'Free SSL (https) certificate', included: true },
+        { text: 'Free Support + update (1 year)', included: true },
+        { text: 'Support renew ৳ 18,000 / year', included: true },
+        { text: 'Server Configuration: CPU: 4 core (logical); RAM: 8 GB; HDD 1: 120 GB SSD; HDD 2: 500 GBx2 (Raid-1/Mirror)', included: true },
+      ],
+      cta: 'Call for Meeting',
+      popular: false,
+    },
+    {
+      id: 'own-2000',
+      name: '2000X',
+      audience: 'Upto 2000 active users',
+      monthlyPrice: 200000,
+      yearlyPrice: 0,
+      description: 'For medium-sized self-hosted deployments.',
+      features: [
+        { text: 'All Modules', included: true },
+        { text: 'All Features', included: true },
+        { text: 'admin.YourDomain.com', included: true },
+        { text: 'customer.YourDomain.com', included: true },
+        { text: 'Free SSL (https) certificate', included: true },
+        { text: 'Free Support + update (1 year)', included: true },
+        { text: 'Support renew ৳ 24,000 / year', included: true },
+        { text: 'Server Configuration: CPU: 8 core (logical); RAM: 16 GB; HDD 1: 120 GB SSD; HDD 2: 500 GBx2 (Raid-1/Mirror)', included: true },
+      ],
+      cta: 'Call for Meeting',
+      popular: false,
+    },
+    {
+      id: 'own-3000',
+      name: '3000X',
+      audience: 'Upto 3000 active users',
+      monthlyPrice: 250000,
+      yearlyPrice: 0,
+      description: 'For larger self-hosted deployments needing higher capacity.',
+      features: [
+        { text: 'All Modules', included: true },
+        { text: 'All Features', included: true },
+        { text: 'admin.YourDomain.com', included: true },
+        { text: 'customer.YourDomain.com', included: true },
+        { text: 'Free SSL (https) certificate', included: true },
+        { text: 'Free Support + update (1 year)', included: true },
+        { text: 'Support renew ৳ 30,000 / year', included: true },
+        { text: 'Server Configuration: CPU: 8 core (logical); RAM: 16 GB; HDD 1: 120 GB SSD; HDD 2: 500 GBx2 (Raid-1/Mirror)', included: true },
+      ],
+      cta: 'Call for Meeting',
+      popular: false,
+    },
+    {
+      id: 'own-xx000',
+      name: 'XX000',
+      audience: '5000/10000/30000+ users',
+      monthlyPrice: 0,
+      yearlyPrice: 0,
+      description: 'Large deployments — call for pricing and custom server configuration.',
+      features: [
+        { text: 'All Modules', included: true },
+        { text: 'All Features', included: true },
+        { text: 'admin.YourDomain.com', included: true },
+        { text: 'customer.YourDomain.com', included: true },
+        { text: 'Free SSL (https) certificate', included: true },
+        { text: 'Free Support + update (1 year)', included: true },
+        { text: 'Support renew 20% of price', included: true },
+        { text: 'Server Configuration (10,000 users): CPU: 16 core (logical); RAM: 32 GB; HDD 1: 120 GB SSD; HDD 2: 1 TBx2 (Raid-1/Mirror) OR HDD 2: 1 TBx4 (Raid-5)', included: true },
+      ],
+      cta: 'Call for Meeting',
+      popular: false,
     },
   ],
   whyChooseHeader: {
@@ -327,8 +430,14 @@ export const defaultContent: SiteContent = {
       id: 'starter',
       name: 'Starter',
       audience: 'For Small ISPs',
-      monthlyPrice: 49,
+      monthlyPrice: 2500,
       yearlyPrice: 39,
+      priceLabel: '৳ 2,500/MONTH',
+      setupCharge: '৳ 5,000 Setup Charge',
+      priceValue: '2,500',
+      priceUnit: '',
+      pricePeriod: 'MONTH',
+      serverConfig: 'CPU: 4 core (logical); RAM: 8 GB; HDD 1: 120 GB SSD; HDD 2: 500 GBx2 (Raid-1/Mirror)',
       description: 'Perfect for small ISPs getting started with automated billing.',
       features: [
         { text: 'Up to 500 customers', included: true },
@@ -349,6 +458,12 @@ export const defaultContent: SiteContent = {
       audience: 'For Growing Businesses',
       monthlyPrice: 129,
       yearlyPrice: 99,
+      priceLabel: '৳ 4.5 / USER / MONTH',
+      setupCharge: '৳ 10,000 Setup Charge',
+      priceValue: '4.5',
+      priceUnit: 'USER',
+      pricePeriod: 'MONTH',
+      serverConfig: 'CPU: 8 core (logical); RAM: 16 GB; HDD 1: 120 GB SSD; HDD 2: 500 GBx2 (Raid-1/Mirror)',
       description: 'Full-featured solution for growing ISP businesses.',
       features: [
         { text: 'Up to 5,000 customers', included: true },
@@ -369,6 +484,12 @@ export const defaultContent: SiteContent = {
       audience: 'For Large ISP Networks',
       monthlyPrice: 299,
       yearlyPrice: 249,
+      priceLabel: '৳ 4.0 / USER / MONTH',
+      setupCharge: '৳ 10,000 Setup Charge',
+      priceValue: '4.0',
+      priceUnit: 'USER',
+      pricePeriod: 'MONTH',
+      serverConfig: 'CPU: 8 core (logical); RAM: 16 GB; HDD 1: 120 GB SSD; HDD 2: 500 GBx2 (Raid-1/Mirror)',
       description: 'Enterprise-grade platform for large-scale ISP operations.',
       features: [
         { text: 'Unlimited customers', included: true },
@@ -382,45 +503,6 @@ export const defaultContent: SiteContent = {
       ],
       cta: 'Contact Sales',
       popular: false,
-    },
-  ],
-  testimonialsHeader: {
-    badge: 'Testimonials',
-    title: 'Loved by ISP Owners Worldwide',
-    subtitle: 'See what network administrators and ISP owners say about Nixor.',
-  },
-  testimonials: [
-    {
-      id: '1',
-      name: 'Ahmed Rahman',
-      role: 'Owner, SpeedNet ISP',
-      content:
-        'Nixor transformed how we handle billing. What used to take our team 3 days now happens automatically. Our collection rate improved by 40% in the first month.',
-      rating: 5,
-    },
-    {
-      id: '2',
-      name: 'Sarah Mitchell',
-      role: 'Network Administrator, ConnectPro',
-      content:
-        'The bandwidth management and customer monitoring tools are exceptional. We can see exactly what is happening on our network in real time. Highly recommended.',
-      rating: 5,
-    },
-    {
-      id: '3',
-      name: 'Raj Patel',
-      role: 'CEO, FiberLink Broadband',
-      content:
-        'We migrated from a legacy billing system in under a week. The support team was incredible, and the reporting dashboard gives us insights we never had before.',
-      rating: 5,
-    },
-    {
-      id: '4',
-      name: 'Maria Gonzalez',
-      role: 'Operations Manager, NetWave ISP',
-      content:
-        'Managing 2,000+ customers used to be a nightmare. Nixor made it simple. The automated invoicing and payment tracking alone saved us 20 hours per week.',
-      rating: 5,
     },
   ],
   faqHeader: {
@@ -512,8 +594,8 @@ export function mergeWithDefaults(stored: Partial<SiteContent>): SiteContent {
     dashboardTabs: stored.dashboardTabs?.length ? stored.dashboardTabs : defaultContent.dashboardTabs,
     pricingHeader: { ...defaultContent.pricingHeader, ...stored.pricingHeader },
     pricing: stored.pricing?.length ? stored.pricing : defaultContent.pricing,
-    testimonialsHeader: { ...defaultContent.testimonialsHeader, ...stored.testimonialsHeader },
-    testimonials: stored.testimonials?.length ? stored.testimonials : defaultContent.testimonials,
+    ownServerHeader: { ...defaultContent.ownServerHeader, ...stored.ownServerHeader },
+    ownServer: stored.ownServer?.length ? stored.ownServer : defaultContent.ownServer,
     faqHeader: { ...defaultContent.faqHeader, ...stored.faqHeader },
     faq: stored.faq?.length ? stored.faq : defaultContent.faq,
     cta: { ...defaultContent.cta, ...stored.cta },
@@ -521,6 +603,5 @@ export function mergeWithDefaults(stored: Partial<SiteContent>): SiteContent {
     contact: { ...defaultContent.contact, ...stored.contact },
     navbar: { ...defaultContent.navbar, ...stored.navbar },
     footer: { ...defaultContent.footer, ...stored.footer },
-    showTestimonials: stored.showTestimonials ?? defaultContent.showTestimonials,
   }
 }

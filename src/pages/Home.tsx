@@ -3,7 +3,7 @@ import Features from '../components/Features'
 import WhyChoose from '../components/WhyChoose'
 import DashboardShowcase from '../components/DashboardShowcase'
 import Pricing from '../components/Pricing'
-import Testimonials from '../components/Testimonials'
+import OwnServer from '../components/OwnServer'
 import FAQ from '../components/FAQ'
 import CTA from '../components/CTA'
 import ContactForm from '../components/ContactForm'
@@ -19,7 +19,7 @@ export default function Home() {
       <WhyChoose />
       <DashboardShowcase />
       <Pricing />
-      {content.showTestimonials && <Testimonials />}
+      <OwnServer />
       <FAQ />
       <CTA />
       <ContactForm />

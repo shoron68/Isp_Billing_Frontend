@@ -5,7 +5,7 @@ import FeaturesEditor from '../components/admin/FeaturesEditor'
 import WhyChooseEditor from '../components/admin/WhyChooseEditor'
 import DashboardImageEditor from '../components/admin/DashboardImageEditor'
 import PricingEditor from '../components/admin/PricingEditor'
-import TestimonialsEditor from '../components/admin/TestimonialsEditor'
+import OwnServerEditor from '../components/admin/OwnServerEditor'
 import FAQEditor from '../components/admin/FAQEditor'
 import CTAEditor from '../components/admin/CTAEditor'
 import GeneralEditor from '../components/admin/GeneralEditor'
@@ -27,8 +27,8 @@ export default function AdminDashboard() {
         return <DashboardImageEditor />
       case 'pricing':
         return <PricingEditor />
-      case 'testimonials':
-        return <TestimonialsEditor />
+      case 'ownServer':
+        return <OwnServerEditor />
       case 'faq':
         return <FAQEditor />
       case 'cta':

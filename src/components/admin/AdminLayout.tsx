@@ -1,6 +1,7 @@
 import { Link, useNavigate } from 'react-router-dom'
 import {
   DollarSign,
+  Server,
   ExternalLink,
   HelpCircle,
   Home,
@@ -23,7 +24,7 @@ export type AdminTab =
   | 'whyChoose'
   | 'dashboard'
   | 'pricing'
-  | 'testimonials'
+  | 'ownServer'
   | 'faq'
   | 'cta'
   | 'general'
@@ -36,7 +37,7 @@ const navItems: { id: AdminTab; label: string; icon: typeof Home }[] = [
   { id: 'whyChoose', label: 'Why Choose Nixor', icon: Sparkles },
   { id: 'dashboard', label: 'Dashboard Showcase', icon: Image },
   { id: 'pricing', label: 'Package Pricing', icon: DollarSign },
-  { id: 'testimonials', label: 'Testimonials', icon: Star },
+  { id: 'ownServer', label: 'Own Server', icon: Server },
   { id: 'faq', label: 'FAQ', icon: HelpCircle },
   { id: 'cta', label: 'Call To Action', icon: MessageSquare },
   { id: 'general', label: 'Navbar & Footer', icon: LayoutDashboard },
